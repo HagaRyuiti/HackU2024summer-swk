@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play</title>
+    <style>
+        /* 各ページのデフォルトスタイルは非表示 */
+        .page {
+            display: none;
+        }
+
+        /* 現在表示中のページのみ表示 */
+        .active {
+            display: block;
+        }
+
+        /* ナビゲーションメニューのスタイル */
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Play</h1>
+
+    <!--
+    <nav>
+        <button onclick="showPage('page1')">Page 1</button>
+    </nav>
+    -->
+
+    <!-- 1つ目のページ -->
+    <div id="page1" class="page active">
+        <h1>Page 1</h1>
+        <button onclick="showPage('page2')">単語</button>
+        <button onclick="showPage('page3')">演習</button>
+    </div>
+
+    <!-- 2つ目のページ -->
+    <div id="page2" class="page">
+        <div id="id"></div>
+        <div id="yomi"></div>
+    </div>
+
+    <!-- 3つ目のページ -->
+    <div id="page3" class="page">
+        <div id="tango"></div>
+        <div id="yomi"></div>
+        <div id="explain"></div>
+    </div>
+
+    <!-- 4つ目のページ -->
+    <div id="page4" class="page">
+        <h1>Page 4</h1>
+        <p>This is the content of Page 4.</p>
+    </div>
+
+    <script type="text/javascript">
+        // Flaskから渡された辞書をJavaScriptに変換
+        var data = {{ data | tojson | safe }};
+        console.log(data);
+
+        // 辞書データの要素数を取得
+        var numberOfKeys = Object.keys(data).length;
+
+        // コンソールに要素数を表示
+        console.log("辞書データの要素数: " + numberOfKeys);
+
+        for (let i = 0; i < numberOfKeys; i++) {
+            var key = keys[i];
+            var selectedData = data[key];
+
+            if (selectedData) {
+                // selectedData が存在する場合のみ display を呼び出す
+                display(selectedData);
+            } else {
+                console.warn(`質問番号 ${key} に対応するデータが見つかりませんでした。`);
+            }
+        }
+
+        // 画面に data を表示
+        function display(text) {
+            // 質問を表示
+            document.getElementById("id").innerHTML = text.id;
+            document.getElementById("tango").innerHTML = text.tango;
+            document.getElementById("yomi").innerHTML = text.yomi;
+            document.getElementById("explain").innerHTML = text.explain;
+
+            console.log(text.id);
+            console.log(text.tango);
+            console.log(text.yomi);
+            console.log(text.explain);
+
+            // question 関数を呼び出して分割とログ出力を行う
+            question(text);
+        }
+
+        function question(text) {
+            const chartext = text.yomi.split(''); // 1文字ずつ分割
+            const yomiDiv = document.getElementById('yomi');
+            
+            // yomiDiv の内容をクリア
+            yomiDiv.innerHTML = '';
+
+            // 各文字を <span> タグでラップして追加
+            chartext.forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                // 任意でスタイルを追加
+                span.style.marginRight = '30px'; // 文字の間隔を調整
+                yomiDiv.appendChild(span);
+            });
+
+            console.log(`文字数: ${chartext.length}`);
+            chartext.forEach((char, index) => {
+                console.log(`文字 ${index + 1}: ${char}`);
+            });
+        }
+
+        // ページの遷移を行う関数
+        function showPage(pageId) {
+            // すべてのページを非表示にする
+            var pages = document.querySelectorAll('.page');
+            pages.forEach(function(page) {
+                page.classList.remove('active');
+            });
+
+            // 選択されたページを表示する
+            var selectedPage = document.getElementById(pageId);
+            selectedPage.classList.add('active');
+        }
+    </script>
+</body>
+</html>
