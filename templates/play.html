@@ -31,19 +31,10 @@
         // キーの配列を取得
         var keys = Object.keys(data);
 
-        for (let i = 0; i < numberOfKeys; i++) {
-            var key = keys[i];
-            var selectedData = data[key];
+        // 現在のデータインデックス
+        let currentIndex = 0;
 
-            if (selectedData) {
-                // selectedData が存在する場合のみ display を呼び出す
-                display(selectedData);
-            } else {
-                console.warn(`質問番号 ${key} に対応するデータが見つかりませんでした。`);
-            }
-        }
-
-        // 画面に data を表示
+        // データを表示する関数
         function display(text) {
             // 質問を表示
             document.getElementById("id").innerHTML = text.id;
@@ -58,6 +49,11 @@
 
             // question 関数を呼び出して分割とログ出力を行う
             question(text);
+        }
+
+        // 初期表示
+        if (numberOfKeys > 0) {
+            display(data[keys[currentIndex]]);
         }
 
         function question(text) {
@@ -77,6 +73,24 @@
                 if (inputText && wanakana) {
                     const re_textbox = wanakana.toHiragana(inputText);
                     console.log("変換後テキスト:", re_textbox);
+
+                    const answer = wanakana.toHiragana(text.yomi);
+                    console.log("変換後テキスト:", answer);
+
+                    // 入力が正しいかチェック
+                    if (re_textbox === answer) {
+                        console.log("正解！");
+                        textbox.value = ''; // テキストボックスをクリア
+
+                        // 次のデータに進む
+                        currentIndex++;
+                        if (currentIndex < numberOfKeys) {
+                            display(data[keys[currentIndex]]);
+                        } else {
+                            console.log("すべてのデータが表示されました。");
+                            alert("すべての質問に回答しました！");
+                        }
+                    }
 
                     const sentenceArray = document.getElementById("yomi").querySelectorAll("span");
                     const arrayValue = re_textbox.split("");

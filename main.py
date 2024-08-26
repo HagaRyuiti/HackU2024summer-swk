@@ -22,6 +22,12 @@ def index():
             "tango" : "チョコレート",
             "yomi" : "ちょこれーと",
             "explain" : "カカオ豆をいって粉にした洋菓子の一種。"
+        },
+        {
+            "id": 4,
+            "tango" : "チョコレート",
+            "yomi" : "ちょこれーと",
+            "explain" : "カカオ豆をいって粉にした洋菓子の一種。"
         }
     ]
     return render_template('play.html', data=data)
