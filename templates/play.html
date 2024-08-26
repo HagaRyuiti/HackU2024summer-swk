@@ -4,63 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play</title>
-    <style>
-        /* 各ページのデフォルトスタイルは非表示 */
-        .page {
-            display: none;
-        }
-
-        /* 現在表示中のページのみ表示 */
-        .active {
-            display: block;
-        }
-
-        /* ナビゲーションメニューのスタイル */
-        nav {
-            margin-bottom: 20px;
-        }
-
-        nav button {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     <h1>Play</h1>
+    <!-- ここに質問を表示 -->
+    <div id="id"></div>
+    <div id="tango"></div>
+    <div id="yomi"></div>
+    <div id="explain"></div>
+    <input type="text" id="textbox">
 
-    <!--
-    <nav>
-        <button onclick="showPage('page1')">Page 1</button>
-    </nav>
-    -->
+    <script type="module">
+        // wanakanaをインポート
+        import * as wanakana from 'https://cdn.skypack.dev/wanakana';
 
-    <!-- 1つ目のページ -->
-    <div id="page1" class="page active">
-        <h1>Page 1</h1>
-        <button onclick="showPage('page2')">単語</button>
-        <button onclick="showPage('page3')">演習</button>
-    </div>
-
-    <!-- 2つ目のページ -->
-    <div id="page2" class="page">
-        <div id="id"></div>
-        <div id="yomi"></div>
-    </div>
-
-    <!-- 3つ目のページ -->
-    <div id="page3" class="page">
-        <div id="tango"></div>
-        <div id="yomi"></div>
-        <div id="explain"></div>
-    </div>
-
-    <!-- 4つ目のページ -->
-    <div id="page4" class="page">
-        <h1>Page 4</h1>
-        <p>This is the content of Page 4.</p>
-    </div>
-
-    <script type="text/javascript">
         // Flaskから渡された辞書をJavaScriptに変換
         var data = {{ data | tojson | safe }};
         console.log(data);
@@ -70,6 +27,9 @@
 
         // コンソールに要素数を表示
         console.log("辞書データの要素数: " + numberOfKeys);
+
+        // キーの配列を取得
+        var keys = Object.keys(data);
 
         for (let i = 0; i < numberOfKeys; i++) {
             var key = keys[i];
@@ -102,38 +62,31 @@
 
         function question(text) {
             const chartext = text.yomi.split(''); // 1文字ずつ分割
-            const yomiDiv = document.getElementById('yomi');
-            
-            // yomiDiv の内容をクリア
-            yomiDiv.innerHTML = '';
+            const length = chartext.length; // 文字数を計算
 
-            // 各文字を <span> タグでラップして追加
-            chartext.forEach((char, index) => {
-                const span = document.createElement('span');
-                span.textContent = char;
-                // 任意でスタイルを追加
-                span.style.marginRight = '30px'; // 文字の間隔を調整
-                yomiDiv.appendChild(span);
-            });
-
-            console.log(`文字数: ${chartext.length}`);
+            console.log(`文字数: ${length}`);
             chartext.forEach((char, index) => {
                 console.log(`文字 ${index + 1}: ${char}`);
             });
-        }
 
-        // ページの遷移を行う関数
-        function showPage(pageId) {
-            // すべてのページを非表示にする
-            var pages = document.querySelectorAll('.page');
-            pages.forEach(function(page) {
-                page.classList.remove('active');
+            const textbox = document.getElementById('textbox');
+            textbox.addEventListener("input", () => {
+                const inputText = textbox.value;
+                console.log("入力テキスト:", inputText);
+
+                if (inputText && wanakana) {
+                    const re_textbox = wanakana.toHiragana(inputText);
+                    console.log("変換後テキスト:", re_textbox);
+
+                    const sentenceArray = document.getElementById("yomi").querySelectorAll("span");
+                    const arrayValue = re_textbox.split("");
+                    console.log(arrayValue);
+                } else {
+                    console.warn("入力テキストが空、またはwanakanaモジュールが未定義です。");
+                }
             });
-
-            // 選択されたページを表示する
-            var selectedPage = document.getElementById(pageId);
-            selectedPage.classList.add('active');
         }
+
     </script>
 </body>
 </html>

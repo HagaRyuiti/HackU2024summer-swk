@@ -16,6 +16,12 @@ def index():
             "tango": "IoT",
             "yomi": "IoT",
             "explain": "モノがインターネットで接続・通信する技術。"
+        },
+        {
+            "id": 3,
+            "tango" : "チョコレート",
+            "yomi" : "ちょこれーと",
+            "explain" : "カカオ豆をいって粉にした洋菓子の一種。"
         }
     ]
     return render_template('play.html', data=data)
