@@ -1,6 +1,8 @@
 let currentIndex = 0;
 let data=[];
 let typeInput=document.getElementById('inputField');
+let randomArray=[];
+let randomIndex=0;
 
 function displayWord() {
     if (currentIndex < data.length) {
@@ -45,7 +47,9 @@ function checkInput() {
 
     // 入力が完全に一致した場合の処理
     if (userInput === str) {
-        currentIndex++;
+        randomIndex++;
+        currentIndex=randomArray[randomIndex];
+        console.log(currentIndex);
         displayWord();
     }
 }
@@ -71,7 +75,18 @@ function loadData() {
 }
 
 window.onload = function() {
+    for(let i=0;i<10;i++){
+        randomArray[i]=i;
+    }
+    for(let i=9;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [randomArray[i],randomArray[j]]=[randomArray[j],randomArray[i]];
+    }
+    console.log('OK');
+    console.log(randomArray);
+    currentIndex=randomArray[randomIndex];
     loadData(); // データをロード
+
 };
 
 window.oninput=function(){
