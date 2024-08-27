@@ -1,0 +1,18 @@
+/* 各ページのデフォルトスタイルは非表示 */
+.page {
+    display: none;
+}
+
+/* 現在表示中のページのみ表示 */
+.active {
+    display: block;
+}
+
+/* ナビゲーションメニューのスタイル */
+nav {
+    margin-bottom: 20px;
+}
+
+nav button {
+    margin-right: 10px;
+}

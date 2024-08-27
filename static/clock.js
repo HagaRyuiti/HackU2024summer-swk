@@ -1,5 +1,14 @@
+// タイマーの時間を表示する場所を覚えておく変数
+let timerStringDOM;
+
 // 開始時間を記録しておく変数
 let startTime;
+
+// タイマーを識別するID
+let timerId = null;
+
+// 現在の経過時間を記録しておく変数
+let currentTimerTime = 0;
 
 // ミリ秒を経過時間の文字列に直す関数
 function msecToSecString(time) {
@@ -19,19 +28,11 @@ function msecToSecString(time) {
 }
 
 // タイマーの時刻を更新する処理
-function updateTimer() {
+function UpdateTimer() {
   // 現在の時刻を取得
   const nowTime = new Date().getTime();
 
   // タイマーの表示を更新
-  document.getElementById('timer').innerHTML = msecToSecString(nowTime - startTime);
+  timerStringDOM.innerHTML = msecToSecString(nowTime - startTime);
 }
 
-// ページが完全に読み込まれた後に実行される処理
-window.onload = function() {
-  // タイマーの開始時間を記録
-  startTime = new Date().getTime();
-
-  // 1秒ごとにタイマーを更新
-  setInterval(updateTimer, 1000);
-};
