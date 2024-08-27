@@ -1,0 +1,52 @@
+[
+    {
+        "question": 1,
+        "tango": "寿司",
+        "latin": "sushi"
+    },
+    {
+        "question": 2,
+        "tango": "ラーメン",
+        "latin": "ra-men"
+    },
+    {
+        "question": 3,
+        "tango": "天ぷら",
+        "latin": "tempura"
+    },
+    {
+        "question": 4,
+        "tango": "刺身",
+        "latin": "sashimi"
+    },
+    {
+        "question": 5,
+        "tango": "うどん",
+        "latin": "udon"
+    },
+    {
+        "question": 6,
+        "tango": "カレー",
+        "latin": "karee"
+    },
+    {
+        "question": 7,
+        "tango": "焼き鳥",
+        "latin": "yakitori"
+    },
+    {
+        "question": 8,
+        "tango": "たこ焼き",
+        "latin": "takoyaki"
+    },
+    {
+        "question": 9,
+        "tango": "すき焼き",
+        "latin": "sukiyaki"
+    },
+    {
+        "question": 10,
+        "tango": "お好み焼き",
+        "latin": "okonomiyaki"
+    }
+]
