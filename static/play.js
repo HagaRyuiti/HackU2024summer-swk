@@ -191,6 +191,12 @@ function resultPage(pageId) {
     }
 
     scoreShow(currentTimerTime, skipsum);
+
+    // スコアを計算し、サーバーにデータを送信
+    const score = (1000 - currentTimerTime / 100 - skipsum * 40) * 100;
+    const roundedScore = Math.round(score);
+    
+    sendDataToServer(roundedScore, currentTimerTime, data);
 }
 
 function scoreShow(time, dec) {
@@ -201,4 +207,32 @@ function scoreShow(time, dec) {
     document.getElementById("score4").innerHTML = roundedScore;
 
     console.log(roundedScore);
+
+    //sendDataToServer(roundedScore, time, dec);
 }
+
+function sendDataToServer(score, time, data) {
+    // 送信するデータを作成
+    const payload = {
+        score: score,
+        time: time,
+        data: data
+    };
+
+    // POSTリクエストでデータを送信
+    fetch('/save_data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('サーバーからの応答:', data);
+    })
+    .catch((error) => {
+        console.error('エラー:', error);
+    });
+}
+
