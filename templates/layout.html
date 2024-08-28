@@ -9,13 +9,7 @@
 <body>
     {% block content %}{% endblock %}
 
-    <!-- Flaskから辞書データをJavaScriptに渡す -->
-    <script type="text/javascript">
-        var data = {{ data | tojson | safe }};
-    </script>
-
     <!-- 外部JavaScriptファイルを読み込む -->
-    <script type="module" src="static/play.js"></script>
     <script src="static/clock.js"></script>
     <script src="static/movepage.js"></script>
 </body>

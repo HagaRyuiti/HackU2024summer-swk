@@ -1,6 +1,17 @@
 // wanakanaをインポート
 import * as wanakana from 'https://cdn.skypack.dev/wanakana';
 
+console.log(data);
+
+// 辞書データの要素数を取得
+var numberOfKeys = Object.keys(data).length;
+
+// コンソールに要素数を表示
+console.log("辞書データの要素数: " + numberOfKeys);
+
+// キーの配列を取得
+var keys = Object.keys(data);
+
 window.onload = function () {
     // page2,3の遷移を行う関数
     timerStringDOM = document.getElementById('timer3');

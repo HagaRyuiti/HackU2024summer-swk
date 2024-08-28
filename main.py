@@ -53,6 +53,12 @@ def change():
     action = request.form.get('action')
     if action == 'play':
         return redirect(url_for('play1'))
+    elif action == 'play2':
+        return redirect(url_for('play2'))
+    elif action == 'play3':
+        return redirect(url_for('play3'))
+    elif action == 'play4':
+        return redirect(url_for('play4'))
     elif action == 'replay':
         return redirect(url_for('replay'))
     elif action == 'ranking':
@@ -66,23 +72,26 @@ def play():
     return render_template('play1.html')
 
 @app.route('/play2', methods=['GET', 'POST'])
-def play():
+def play2():
     if request.method == 'POST':
         themebox = request.form['themebox']
         data = generate(themebox)
-        return render_template('play.html', data=data)
-    return render_template('play2.html')
+        print("生成できたよ")
+        return render_template('play2.html', data=data)
+    # 'GET' メソッドの場合、空のデータを渡す
+    return render_template('play2.html', data=[])
 
 @app.route('/play3', methods=['GET', 'POST'])
-def play():
+def play3():
     if request.method == 'POST':
         themebox = request.form['themebox']
         data = generate(themebox)
-        return render_template('play.html', data=data)
-    return render_template('play3.html')
+        return render_template('play3.html', data=data)
+    # 'GET' メソッドの場合、空のデータを渡す
+    return render_template('play3.html', data=[])
 
 @app.route('/play4', methods=['GET', 'POST'])
-def play():
+def play4():
     return render_template('play4.html')
 
 

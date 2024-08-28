@@ -15,6 +15,12 @@
     <input type="button" value="skip" onClick="SkipButtonClick()">
 </div>
 
+<!-- Flaskから辞書データをJavaScriptに渡す -->
+<script type="text/javascript">
+    var data = {{ data | tojson | safe }};
+</script>
+
 <!-- 外部JavaScriptファイルを読み込む -->
+<script type="module" src="static/play.js"></script>
 <script type="module" src="static/play3.js"></script>
 {% endblock %}

@@ -5,13 +5,14 @@
 
 <!-- 1つ目のページ -->
 <div id="page1">
-    <a href="{{ url_for('/play2') }}">
-        <button id="playgame">
+    <input type="text" id="themebox">
+    <a href="{{ url_for('play2') }}">
+        <button id="playeasy">
             暗記モード
         </button><br>
     </a>
-    <a href="{{ url_for('/play3') }}">
-        <button id="playgame">
+    <a href="{{ url_for('play3') }}">
+        <button id="playhard">
             一問一答モード
         </button><br>
     </a>
