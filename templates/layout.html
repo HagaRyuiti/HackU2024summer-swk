@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <title>Play</title>
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    <!-- Flaskから辞書データをJavaScriptに渡す -->
+    <script type="text/javascript">
+        var data = {{ data | tojson | safe }};
+    </script>
+
+    <!-- 外部JavaScriptファイルを読み込む -->
+    <script type="module" src="static/play.js"></script>
+    <script src="static/clock.js"></script>
+    <script src="static/movepage.js"></script>
+</body>
+</html>

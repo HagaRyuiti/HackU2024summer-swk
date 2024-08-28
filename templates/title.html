@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="cent">
+    <div id="top">
+        フォーカスタディ
+    </div><br>
+    <a href="{{ url_for('change/play') }}">
+        <button id="playgame">
+            やってみる
+        </button><br>
+    </a>
+    <a href="{{ url_for('change/replay') }}">
+        <button id="replaygame">
+            復習する
+        </button><br>
+    </a>
+    <button id="rankingpage" href="{{ url_for('change/ranking') }}">
+        ランキング
+    </button><br>        
+</div>
+{% endblock %}

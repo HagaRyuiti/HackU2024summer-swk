@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Play</h1>
+
+<!-- 1つ目のページ -->
+<div id="page1">
+    <a href="{{ url_for('/play2') }}">
+        <button id="playgame">
+            暗記モード
+        </button><br>
+    </a>
+    <a href="{{ url_for('/play3') }}">
+        <button id="playgame">
+            一問一答モード
+        </button><br>
+    </a>
+</div>
+{% endblock %}

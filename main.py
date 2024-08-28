@@ -1,39 +1,102 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
+import openai
 import json
 import os
 from datetime import datetime
 
 app = Flask(__name__)
 
-@app.route('/')
+def load_api_key():
+    with open('openai_api_key.txt', 'r') as file:
+        return file.read().strip()
+openai.api_key = load_api_key()
+
+# chatGPT
+def generate(themebox):
+    response = openai.ChatCompletion.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "あなたは役に立つアシスタントです。"},
+            {"role": "user", "content": f"1. 1行目に、{themebox}に関連する単語を生成してください。()書きはしないでください。"},
+            {"role": "user", "content": f"2. 2行目に、単語の英語と数字をそのままに、カタカナと漢字をひらがなに変換した単語も生成してください。"},
+            {"role": "user", "content": f"3. 3行目に、生成した単語に説明だけを付けてください。"},
+            {"role": "user", "content": f"4. 全ての行の先頭に必ず”-”を付けてください"},
+            {"role": "user", "content": f"1. 2. 3. 4.を順に、20回繰り返してください"},
+            {"role": "user", "content": f"これ以外は生成する必要はありません。"}
+        ],
+        max_tokens = 2000,
+    )
+    themebox_response = response.choices[0].message['content']
+    entries = themebox_response.split("\n\n")
+    data = []
+    for idx, entry in enumerate(entries):
+        if entry.strip():  # 空行を無視
+            parts = entry.split("\n")
+            if len(parts) >= 3:
+                tango = parts[0].split("- ")[1].strip()
+                yomi = parts[1].strip().split("- ")[1].strip()
+                explain = parts[2].strip().split("- ")[1].strip()
+                data.append({
+                    "id": idx + 1,
+                    "tango": tango,
+                    "yomi": yomi,
+                    "explain": explain
+                })
+    return data
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    data = [
-        {
-            "id": 1,
-            "tango": "機械学習",
-            "yomi": "きかいがくしゅう",
-            "explain": "データから学習し、予測や分類を行う技術。"
-        },
-        {
-            "id": 2,
-            "tango": "IoT",
-            "yomi": "IoT",
-            "explain": "モノがインターネットで接続・通信する技術。"
-        },
-        {
-            "id": 3,
-            "tango": "チョコレート",
-            "yomi": "ちょこれーと",
-            "explain": "カカオ豆をいって粉にした洋菓子の一種。"
-        },
-        {
-            "id": 4,
-            "tango": "チョコレート",
-            "yomi": "ちょこれーと",
-            "explain": "カカオ豆をいって粉にした洋菓子の一種。"
-        }
-    ]
-    return render_template('play.html', data=data)
+	return render_template('title.html')
+
+@app.route('/change', methods=['GET', 'POST'])
+def change():
+    action = request.form.get('action')
+    if action == 'play':
+        return redirect(url_for('play1'))
+    elif action == 'replay':
+        return redirect(url_for('replay'))
+    elif action == 'ranking':
+        return redirect(url_for('ranking'))
+    else:
+        return render_template('title.html')
+    
+
+@app.route('/play1', methods=['GET', 'POST'])
+def play():
+    return render_template('play1.html')
+
+@app.route('/play2', methods=['GET', 'POST'])
+def play():
+    if request.method == 'POST':
+        themebox = request.form['themebox']
+        data = generate(themebox)
+        return render_template('play.html', data=data)
+    return render_template('play2.html')
+
+@app.route('/play3', methods=['GET', 'POST'])
+def play():
+    if request.method == 'POST':
+        themebox = request.form['themebox']
+        data = generate(themebox)
+        return render_template('play.html', data=data)
+    return render_template('play3.html')
+
+@app.route('/play4', methods=['GET', 'POST'])
+def play():
+    return render_template('play4.html')
+
+
+@app.route('/replay', methods=['GET', 'POST'])
+def replay():
+    return render_template('replay.html')
+
+@app.route('/result', methods=['GET', 'POST'])
+def result():
+    return render_template()
+
+@app.route('/ranking', methods=['GET', 'POST'])
+def ranking():
+    return render_template('ranking.html')
 
 @app.route('/save_data', methods=['POST'])
 def save_data():
