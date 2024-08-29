@@ -96,7 +96,19 @@ def title():
 
 @app.route('/replay', methods=['GET', 'POST'])
 def replay():
-    return render_template('replay.html')
+    json_folder = 'save_json'
+    files = [f for f in os.listdir(json_folder) if f.endswith('.json')]
+    json_files = []
+
+    for file in files:
+        with open(os.path.join(json_folder, file), 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            json_files.append({
+                'filename': file,
+                'data': data
+            })
+
+    return render_template('replay.html', json_files=json_files)
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
