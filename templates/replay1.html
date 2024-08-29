@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<body>
+    <h1>JSON ファイルリスト</h1>
+    <ul>
+        {% for json_file in json_files %}
+            <li>
+                <h2>{{ json_file.filename }}</h2>
+                <p><strong>Score:</strong> {{ json_file.data.score }}</p>
+                <p><strong>Time:</strong> {{ json_file.data.time }}</p>
+                <button onclick="sendData('{{ json_file.filename }}')">単語モード</button>
+                <button onclick="sendData('{{ json_file.filename }}')">一問一答モード</button>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function sendData(filename) {
+            fetch('/replay2', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ filename: filename })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('データが送信されました: ' + JSON.stringify(data));
+            })
+            .catch((error) => {
+                console.error('エラー:', error);
+            });
+        }
+    </script>
+</body>
+{% endblock %}

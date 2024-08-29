@@ -94,21 +94,30 @@ def play3():
 def title():
 	return render_template('title.html')
 
-@app.route('/replay', methods=['GET', 'POST'])
-def replay():
-    json_folder = 'save_json'
-    files = [f for f in os.listdir(json_folder) if f.endswith('.json')]
+@app.route('/replay1')
+def replay1():
+    # JSONファイルを保存しているディレクトリ
+    json_dir = 'save_json'
     json_files = []
-
-    for file in files:
-        with open(os.path.join(json_folder, file), 'r', encoding='utf-8') as f:
-            data = json.load(f)
+    
+    for filename in os.listdir(json_dir):
+        if filename.endswith('.json'):
+            filepath = os.path.join(json_dir, filename)
+            with open(filepath, 'r', encoding='utf-8') as f:
+                data = json.load(f)
             json_files.append({
-                'filename': file,
+                'filename': filename,
                 'data': data
             })
+    
+    return render_template('replay1.html', json_files=json_files)
 
-    return render_template('replay.html', json_files=json_files)
+@app.route('/replay2', methods=['POST'])
+def replay2():
+    # POSTリクエストからJSONデータを取得
+    json_data = request.get_json()
+    # ここでjson_dataを処理する、例えば保存したり、表示したりする
+    return jsonify({"status": "success", "received_data": json_data})
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
