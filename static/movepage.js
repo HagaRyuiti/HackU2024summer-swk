@@ -1,3 +1,5 @@
+
+
 // page1の遷移を行う関数
 function showPage1(pageId) {
     // タイマーをリセット
@@ -24,6 +26,64 @@ function showPage1(pageId) {
     document.getElementById("number3").innerHTML = '';
     document.getElementById("explain3").innerHTML = '';
     document.getElementById("textbox3").value = '';
+
+    // すべてのページを非表示にする
+    var pages = document.querySelectorAll('.page');
+    pages.forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    // 選択されたページを表示する
+    var selectedPage = document.getElementById(pageId);
+    selectedPage.classList.add('active');
+}
+
+// page2の遷移を行う関数
+function showPage2(pageId) {
+    timerStringDOM = document.getElementById('timer2');
+
+    // 開始する前は00:00と表示
+    timerStringDOM.innerHTML = '00:00'
+
+    // すでにタイマーが動いていないことを確認する
+    if(timerId == null) {
+        // 変数startTimeに開始時間を所持しておく
+        // 現在の時間は、基準時からの経過時間(単位：ミリ秒)
+        startTime = new Date().getTime() - currentTimerTime;
+
+        // 1秒(=1000ミリ秒)ごとにタイマーを更新する処理を記述する
+        timerId = setInterval(UpdateTimer, 1000);
+    }
+
+
+    // すべてのページを非表示にする
+    var pages = document.querySelectorAll('.page');
+    pages.forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    // 選択されたページを表示する
+    var selectedPage = document.getElementById(pageId);
+    selectedPage.classList.add('active');
+}
+
+// page3の遷移を行う関数
+function showPage3(pageId) {
+    timerStringDOM = document.getElementById('timer3');
+
+    // 開始する前は00:00と表示
+    timerStringDOM.innerHTML = '00:00'
+
+    // すでにタイマーが動いていないことを確認する
+    if(timerId == null) {
+        // 変数startTimeに開始時間を所持しておく
+        // 現在の時間は、基準時からの経過時間(単位：ミリ秒)
+        startTime = new Date().getTime() - currentTimerTime;
+
+        // 1秒(=1000ミリ秒)ごとにタイマーを更新する処理を記述する
+        timerId = setInterval(UpdateTimer, 1000);
+    }
+
 
     // すべてのページを非表示にする
     var pages = document.querySelectorAll('.page');

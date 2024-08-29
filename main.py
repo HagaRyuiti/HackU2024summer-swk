@@ -68,7 +68,7 @@ def change():
     
 
 @app.route('/play1', methods=['GET', 'POST'])
-def play():
+def play1():
     return render_template('play1.html')
 
 @app.route('/play2', methods=['GET', 'POST'])

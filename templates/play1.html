@@ -4,17 +4,14 @@
 <h1>Play</h1>
 
 <!-- 1つ目のページ -->
-<div id="page1">
-    <input type="text" id="themebox">
-    <a href="{{ url_for('play2') }}">
-        <button id="playeasy">
-            暗記モード
-        </button><br>
-    </a>
-    <a href="{{ url_for('play3') }}">
-        <button id="playhard">
-            一問一答モード
-        </button><br>
-    </a>
+<div id="page1" class="page active">
+    <form method="POST" action="{{ url_for('play2') }}">
+        <input type="text" id="themebox" name="themebox">
+        <button type="submit">暗記モード</button>
+    </form>
+    <form method="POST" action="{{ url_for('play3') }}">
+        <input type="hidden" name="themebox" value="">
+        <button type="submit">一問一答モード</button>
+    </form>
 </div>
 {% endblock %}
