@@ -67,13 +67,15 @@ function displayWord() {
         document.getElementById('inputField').focus();
         document.getElementById('missDisplay').textContent = ''; // エラーメッセージをリセット
     } else {
-        document.getElementById('wordDisplay').textContent = 'お疲れ様でした！';
-        document.getElementById('inputField').style.display = 'none';
-        document.getElementById('latinDisplay').style.display = 'none';
-        setTimeout(() => {
-            window.location.href = 'index.html'; // 3秒後にindex.htmlにリダイレクト
-        }, 3000); // 3000ミリ秒 = 3秒
-        resultPage('page4'); // スコア表示ページに移動
+        //document.getElementById('wordDisplay').textContent = 'お疲れ様でした！';
+        //document.getElementById('inputField').style.display = 'none';
+        //document.getElementById('latinDisplay').style.display = 'none';
+        //setTimeout(() => {
+        //    window.location.href = 'index.html'; // 3秒後にindex.htmlにリダイレクト
+        //}, 3000); // 3000ミリ秒 = 3秒
+        //resultPage('page4'); // スコア表示ページに移動
+
+        resultPage('page4');
     }
 }
 
@@ -127,8 +129,11 @@ function resultPage(pageId) {
         page.classList.remove('active');
     });
 
-    var selectedPage = document.getElementById(pageId);
-    selectedPage.classList.add('active');
+    //var selectedPage = document.getElementById(pageId);
+    //selectedPage.classList.add('active');
+
+    // Flaskの/play4ルートに移動する
+    window.location.href = '/play4';
 
     timerStringDOM = document.getElementById('timer4');
 
