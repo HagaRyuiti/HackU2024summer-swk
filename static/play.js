@@ -38,13 +38,14 @@ window.scoreShow = scoreShow;
 window.msecToSecString = msecToSecString;
 
 function start() {
-    timerStringDOM = document.getElementById('timer2');
+    // `timerStringDOM` を関数内で定義する
+    let timerStringDOM = document.getElementById('timer2');
 
     // 開始する前は00:00と表示
     timerStringDOM.innerHTML = '00:00';
 
     // すでにタイマーが動いていないことを確認する
-    if(timerId == null) {
+    if (timerId == null) {
         // 変数startTimeに開始時間を所持しておく
         // 現在の時間は、基準時からの経過時間(単位：ミリ秒)
         startTime = new Date().getTime() - currentTimerTime;
@@ -67,13 +68,13 @@ function displayWord() {
         document.getElementById('inputField').focus();
         document.getElementById('missDisplay').textContent = ''; // エラーメッセージをリセット
     } else {
-        //document.getElementById('wordDisplay').textContent = 'お疲れ様でした！';
-        //document.getElementById('inputField').style.display = 'none';
-        //document.getElementById('latinDisplay').style.display = 'none';
+        document.getElementById('wordDisplay').textContent = 'お疲れ様でした！';
+        document.getElementById('inputField').style.display = 'none';
+        document.getElementById('latinDisplay').style.display = 'none';
         //setTimeout(() => {
         //    window.location.href = 'index.html'; // 3秒後にindex.htmlにリダイレクト
         //}, 3000); // 3000ミリ秒 = 3秒
-        //resultPage('page4'); // スコア表示ページに移動
+        resultPage('page4'); // スコア表示ページに移動
 
         resultPage('page4');
     }
@@ -121,7 +122,6 @@ function SkipButtonClick() {
     }
 }
 
-// page4の遷移を行う関数
 function resultPage(pageId) {
     console.log(skipsum);
     var pages = document.querySelectorAll('.page');
@@ -129,13 +129,8 @@ function resultPage(pageId) {
         page.classList.remove('active');
     });
 
-    //var selectedPage = document.getElementById(pageId);
-    //selectedPage.classList.add('active');
-
-    // Flaskの/play4ルートに移動する
-    window.location.href = '/play4';
-
-    timerStringDOM = document.getElementById('timer4');
+    // `timerStringDOM` を関数内で定義する
+    let timerStringDOM = document.getElementById('timer4');
 
     if (timerId != null) {
         clearInterval(timerId);
@@ -153,7 +148,11 @@ function resultPage(pageId) {
     const roundedScore = Math.round(score);
 
     sendDataToServer(roundedScore, currentTimerTime, data);
+
+    // Flaskの/indexルートに移動する
+    window.location.href = '/index';
 }
+
 
 function scoreShow(time, dec) {
     const score = (1000 - time / 100 - dec * 40) * 100;

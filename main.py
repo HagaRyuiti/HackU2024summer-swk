@@ -90,10 +90,6 @@ def play3():
     # 'GET' メソッドの場合、空のデータを渡す
     return render_template('play3.html', data=[])
 
-@app.route('/play4', methods=['GET', 'POST'])
-def play4():
-    return render_template('play4.html')
-
 
 @app.route('/replay', methods=['GET', 'POST'])
 def replay():
