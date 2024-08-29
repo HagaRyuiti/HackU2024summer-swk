@@ -84,7 +84,7 @@ function checkInput() {
     let userInput = typeInput.value; // ユーザーの入力
 
     // 入力のクリーニング（正規表現でローマ字以外を除去）
-    userInput = userInput.replace(/[^a-zA-Z]/g, '');
+    //userInput = userInput.replace(/[^a-zA-Z]/g, '');
     typeInput.value = userInput;
 
     // 入力が正しいかを確認
