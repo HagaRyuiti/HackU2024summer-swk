@@ -71,12 +71,11 @@ function displayWord() {
         document.getElementById('wordDisplay').textContent = 'お疲れ様でした！';
         document.getElementById('inputField').style.display = 'none';
         document.getElementById('latinDisplay').style.display = 'none';
+        document.getElementById('explainDisplay').style.display = 'none';
         //setTimeout(() => {
         //    window.location.href = 'index.html'; // 3秒後にindex.htmlにリダイレクト
         //}, 3000); // 3000ミリ秒 = 3秒
         resultPage('page4'); // スコア表示ページに移動
-
-        resultPage('page4');
     }
 }
 
@@ -150,7 +149,7 @@ function resultPage(pageId) {
     sendDataToServer(roundedScore, currentTimerTime, data);
 
     // Flaskの/indexルートに移動する
-    window.location.href = '/index';
+    window.location.href = '/title';
 }
 
 

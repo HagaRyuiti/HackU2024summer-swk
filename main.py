@@ -57,8 +57,8 @@ def change():
         return redirect(url_for('play2'))
     elif action == 'play3':
         return redirect(url_for('play3'))
-    elif action == 'play4':
-        return redirect(url_for('play4'))
+    elif action == 'index':
+        return redirect(url_for('index'))
     elif action == 'replay':
         return redirect(url_for('replay'))
     elif action == 'ranking':
@@ -90,6 +90,9 @@ def play3():
     # 'GET' メソッドの場合、空のデータを渡す
     return render_template('play3.html', data=[])
 
+@app.route('/title', methods=['GET', 'POST'])
+def title():
+	return render_template('title.html')
 
 @app.route('/replay', methods=['GET', 'POST'])
 def replay():
