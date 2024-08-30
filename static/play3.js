@@ -1,8 +1,6 @@
 // wanakanaをインポート
 import * as wanakana from 'https://cdn.skypack.dev/wanakana';
 
-data=data.data;
-
 console.log(data);
 
 // 辞書データの要素数を取得
@@ -13,7 +11,7 @@ console.log("辞書データの要素数: " + numberOfKeys);
 
 // キーの配列を取得し、ランダムにシャッフル
 var keys = Object.keys(data);
-shuffleArray(keys);  // 配列をシャッフル
+//shuffleArray(keys);  // 配列をシャッフル
 
 let currentIndex = 0;
 let skipsum = 0;
