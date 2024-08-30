@@ -11,8 +11,9 @@ var numberOfKeys = Object.keys(data).length;
 // コンソールに要素数を表示
 console.log("辞書データの要素数: " + numberOfKeys);
 
-// キーの配列を取得
+// キーの配列を取得し、ランダムにシャッフル
 var keys = Object.keys(data);
+shuffleArray(keys);  // 配列をシャッフル
 
 let currentIndex = 0;
 let skipsum = 0;
@@ -37,6 +38,13 @@ window.SkipButtonClick = SkipButtonClick;
 window.sendDataToServer = sendDataToServer;
 window.scoreShow = scoreShow;
 window.msecToSecString = msecToSecString;
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];  // 要素を交換
+    }
+}
 
 function start() {
     // `timerStringDOM` を関数内で定義する
