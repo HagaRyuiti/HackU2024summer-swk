@@ -121,3 +121,19 @@ body{
     border-radius: 10px;  /* 角を10px丸くする */
     border: none;
 }
+
+#jsonfilelist {
+    border: 1px solid #4CAF50;
+    width: 100vw;             /* ビューポート全体の幅に設定 */
+}
+
+#replaymode {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    width: 200px;   /* 幅を指定 */
+    height: 60px;   /* 高さを指定 */
+    font-size: 24px;   /* テキストを大きくする */
+    border-radius: 10px;  /* 角を10px丸くする */
+    border: none;
+}
