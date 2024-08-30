@@ -6,6 +6,7 @@
     <ul>
         {% for json_file in json_files %}
             <li>
+                <p id="jsonfilelist"></p>
                 <h2>{{ json_file.filename }}</h2>
                 <p><strong>テーマ:</strong> {{ json_file.data.themebox }}</p>
                 <p><strong>Score:</strong> {{ json_file.data.score }}</p>

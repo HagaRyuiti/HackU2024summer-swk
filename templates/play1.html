@@ -1,17 +1,22 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Play</h1>
+<h1 id="title">Play</h1>
 
 <!-- 1つ目のページ -->
 <div id="page1" class="page active">
     <form method="POST" action="{{ url_for('play2') }}">
-        <input type="text" id="themebox" name="themebox">
-        <button type="submit">暗記モード</button>
+        <input type="text" id="themebox" name="themebox"><br>
+        <button type="submit" id="abutton">暗記モード</button>
     </form>
+    <p>
+        単語暗記だよ！
+    </p>
     <form method="POST" action="{{ url_for('play3') }}">
-        <input type="hidden" name="themebox" value="">
-        <button type="submit">一問一答モード</button>
+        <input type="text" id="themebox" name="themebox"><br>
+        <button type="submit" id="ibutton">一問一答モード</button>
     </form>
+    <p>
+        単語の意味学習だよ！
 </div>
 {% endblock %}
