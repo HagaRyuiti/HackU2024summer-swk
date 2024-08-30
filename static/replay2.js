@@ -80,6 +80,7 @@ function displayWord() {
         document.getElementById('inputField').style.display = 'none';
         document.getElementById('latinDisplay').style.display = 'none';
         document.getElementById('explainDisplay').style.display = 'none';
+        document.getElementById('missDisplay').style.display = 'none';
         console.log(skipsum);
         var pages = document.querySelectorAll('.page');
         pages.forEach(function (page) {
@@ -148,29 +149,6 @@ function scoreShow(time, dec) {
     const roundedScore = Math.round(score);
     document.getElementById("score4").innerHTML = roundedScore;
     console.log(roundedScore);
-}
-
-function sendDataToServer(score, time, data) {
-    const payload = {
-        score: score,
-        time: time,
-        data: data
-    };
-
-    fetch('/save_data', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('サーバーからの応答:', data);
-        })
-        .catch((error) => {
-            console.error('エラー:', error);
-        });
 }
 
 function msecToSecString(msec) {

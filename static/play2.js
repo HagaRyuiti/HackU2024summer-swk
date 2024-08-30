@@ -71,6 +71,7 @@ function displayWord() {
         document.getElementById('inputField').style.display = 'none';
         document.getElementById('latinDisplay').style.display = 'none';
         document.getElementById('explainDisplay').style.display = 'none';
+        document.getElementById('missDisplay').style.display = 'none';
         console.log(skipsum);
         var pages = document.querySelectorAll('.page');
         pages.forEach(function (page) {

@@ -1,8 +1,9 @@
 // wanakanaをインポート
 import * as wanakana from 'https://cdn.skypack.dev/wanakana';
 
+data=data.data;
+
 console.log(data);
-console.log(themebox);
 
 // 辞書データの要素数を取得
 var numberOfKeys = Object.keys(data).length;
@@ -10,8 +11,9 @@ var numberOfKeys = Object.keys(data).length;
 // コンソールに要素数を表示
 console.log("辞書データの要素数: " + numberOfKeys);
 
-// キーの配列を取得
+// キーの配列を取得し、ランダムにシャッフル
 var keys = Object.keys(data);
+shuffleArray(keys);  // 配列をシャッフル
 
 let currentIndex = 0;
 let skipsum = 0;
@@ -19,6 +21,7 @@ let typeInput = document.getElementById('inputField');
 let timerId = null;
 let startTime;
 let currentTimerTime = 0;
+let skippedProblems = [];  // スキップされた問題のインデックスを格納する配列
 
 window.onload = function() {
     start(); // ページがロードされたときにタイマーを開始
@@ -36,6 +39,13 @@ window.SkipButtonClick = SkipButtonClick;
 window.sendDataToServer = sendDataToServer;
 window.scoreShow = scoreShow;
 window.msecToSecString = msecToSecString;
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];  // 要素を交換
+    }
+}
 
 function start() {
     // `timerStringDOM` を関数内で定義する
@@ -67,6 +77,7 @@ function displayWord() {
         document.getElementById('explainDisplay').textContent = 'お疲れ様でした！';
         document.getElementById('inputField').style.display = 'none';
         document.getElementById('button').style.display = 'none';
+        document.getElementById('missDisplay').style.display = 'none';
         console.log(skipsum);
         var pages = document.querySelectorAll('.page');
         pages.forEach(function (page) {
@@ -88,10 +99,11 @@ function displayWord() {
 
         scoreShow(currentTimerTime, skipsum);
 
-        const score = (1000 - currentTimerTime / 100 - skipsum * 40) * 100;
+        const score = (1000 - currentTimerTime / 500 - skipsum * 40) * 10;
         const roundedScore = Math.round(score);
 
         sendDataToServer(roundedScore, currentTimerTime, data);
+        
         setTimeout(() => {
             // Flaskの/indexルートに移動する
             window.location.href = '/title';
@@ -131,6 +143,7 @@ function checkInput() {
 
 // skipボタンのクリック処理
 function SkipButtonClick() {
+    skippedProblems.push(currentIndex);  // スキップされた問題のインデックスを記録
     skipsum++;
     currentIndex++;
     if (currentIndex < numberOfKeys) {
@@ -143,7 +156,7 @@ function SkipButtonClick() {
 
 
 function scoreShow(time, dec) {
-    const score = (1000 - time / 500 - dec * 40) * 10;
+    const score = (1000 - time / 100 - dec * 40) * 100;
     const roundedScore = Math.round(score);
     document.getElementById("score4").innerHTML = roundedScore;
     console.log(roundedScore);
@@ -151,10 +164,10 @@ function scoreShow(time, dec) {
 
 function sendDataToServer(score, time, data) {
     const payload = {
-        themebox: themebox,
         score: score,
         time: time,
-        data: data
+        data: data,
+        skipped: skippedProblems  // スキップされた問題の情報を追加
     };
 
     fetch('/save_data', {
