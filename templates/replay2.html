@@ -1,19 +1,19 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Play</h1>
-
-<h1>単語モード</h1>
+<div id="playTitle">Retry!</div>
+<div id="tangoMode">単語モード</div>
+<div id="time">経過時間</div>
 <div id="timer2">00:00</div>
 <div id="timer4"></div>
 <div id="score4"></div>
 
-<div id="cent">
+<div id="play2Cent">
     <p id="wordDisplay"></p>
     <p id="latinDisplay"></p>
     <div id="explainDisplay"></div>
     <p id="missDisplay"></p>
-    <input type="text" id="inputField" placeholder="Type the word here">
+    <input type="text" id="inputField" placeholder="ここに入力">
 </div>
 
 <!-- Flaskから辞書データをJavaScriptに渡す -->
