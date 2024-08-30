@@ -34,7 +34,7 @@ window.oninput = function () {
 // 関数定義をすべて追加
 window.displayWord = displayWord;
 window.checkInput = checkInput;
-window.sendDataToServer = sendDataToServer;
+//window.sendDataToServer = sendDataToServer;
 window.scoreShow = scoreShow;
 window.msecToSecString = msecToSecString;
 
