@@ -9,8 +9,12 @@
                 <h2>{{ json_file.filename }}</h2>
                 <p><strong>Score:</strong> {{ json_file.data.score }}</p>
                 <p><strong>Time:</strong> {{ json_file.data.time }}</p>
-                <button onclick="sendData('{{ json_file.filename }}')">単語モード</button>
-                <button onclick="sendData('{{ json_file.filename }}')">一問一答モード</button>
+                <!-- 各JSONファイルに対応するボタンを作成 -->
+                <button onclick="sendData('{{ json_file.filename }}')" action="{{ url_for('replay2') }}">単語モード</button>
+                <form method="POST" action="{{ url_for('replay3') }}">
+                    <input type="text" id="themebox" name="themebox">
+                    <button type="submit">一問一答モード</button>
+                </form>
             </li>
         {% endfor %}
     </ul>
@@ -20,18 +24,21 @@
             fetch('/replay2', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json', // Content-Typeを正しく指定
                 },
-                body: JSON.stringify({ filename: filename })
+                body: JSON.stringify({ filename: filename }) // JSON形式でデータを送信
             })
-            .then(response => response.json())
-            .then(data => {
-                alert('データが送信されました: ' + JSON.stringify(data));
+            .then(response => response.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
             })
             .catch((error) => {
                 console.error('エラー:', error);
             });
         }
     </script>
+    
 </body>
 {% endblock %}

@@ -114,6 +114,25 @@ def replay1():
 
 @app.route('/replay2', methods=['POST'])
 def replay2():
+    # POSTリクエストからファイル名を取得
+    json_data = request.get_json()
+    filename = json_data.get('filename')
+    
+    # JSONファイルを保存しているディレクトリ
+    json_dir = 'save_json'
+    filepath = os.path.join(json_dir, filename)
+    
+    # ファイルが存在するか確認
+    if os.path.exists(filepath):
+        with open(filepath, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return render_template('replay2.html', data=data)
+    else:
+        return jsonify({"error": "ファイルが見つかりませんでした。"}), 404
+
+
+@app.route('/replay3', methods=['POST'])
+def replay3():
     # POSTリクエストからJSONデータを取得
     json_data = request.get_json()
     # ここでjson_dataを処理する、例えば保存したり、表示したりする
