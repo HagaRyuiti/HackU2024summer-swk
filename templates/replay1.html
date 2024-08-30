@@ -5,7 +5,7 @@
     <h1>JSON ファイルリスト</h1>
     <ul>
         {% for json_file in json_files %}
-            <li>
+            <li onmouseenter="showSkippedWords('{{ json_file.filename }}')" onmouseleave="hideSkippedWords('{{ json_file.filename }}')">
                 <h2>{{ json_file.filename }}</h2>
                 <p><strong>テーマ:</strong> {{ json_file.data.themebox }}</p>
                 <p><strong>Score:</strong> {{ json_file.data.score }}</p>
@@ -13,6 +13,12 @@
                 <!-- 各JSONファイルに対応するボタンを作成 -->
                 <button onclick="sendData2('{{ json_file.filename }}')" action="{{ url_for('replay2') }}">単語モード</button>
                 <button onclick="sendData3('{{ json_file.filename }}')" action="{{ url_for('replay3') }}">一問一答モード</button>
+                
+                <!-- 間違えた単語のリストを表示するための隠し要素 -->
+                <div id="skipped-{{ json_file.filename }}" class="skipped-words" style="display:none;">
+                    <h3>間違えた単語:</h3>
+                    <ul id="skipped-words-list-{{ json_file.filename }}"></ul>
+                </div>
             </li>
         {% endfor %}
     </ul>
@@ -36,6 +42,7 @@
                 console.error('エラー:', error);
             });
         }
+
         function sendData3(filename) {
             fetch('/replay3', {
                 method: 'POST',
@@ -54,7 +61,53 @@
                 console.error('エラー:', error);
             });
         }
+
+        // JSONファイルのデータをキャッシュしておく変数
+        const jsonFilesData = {};
+
+        function showSkippedWords(filename) {
+            if (!jsonFilesData[filename]) {
+                // 初めての表示時にJSONデータを取得し、キャッシュに保存
+                fetch(`/get_json_data?filename=${filename}`)  // サーバーからJSONデータを取得
+                    .then(response => response.json())
+                    .then(data => {
+                        jsonFilesData[filename] = data;  // キャッシュに保存
+                        displaySkippedWords(filename, data);
+                    })
+                    .catch((error) => {
+                        console.error('エラー:', error);
+                    });
+            } else {
+                // キャッシュからデータを表示
+                displaySkippedWords(filename, jsonFilesData[filename]);
+            }
+        }
+
+        function displaySkippedWords(filename, data) {
+            const skippedWordsElement = document.getElementById(`skipped-${filename}`);
+            const skippedWordsList = document.getElementById(`skipped-words-list-${filename}`);
+
+            // 現在の表示をクリア
+            skippedWordsList.innerHTML = '';
+
+            // 間違えた単語を取得し、リストに追加
+            data.skipped.forEach(id => {
+                const word = data.data.find(item => item.id === id);
+                if (word) {
+                    const li = document.createElement('li');
+                    li.textContent = `${word.explain} - ${word.tango}`;
+                    skippedWordsList.appendChild(li);
+                }
+            });
+
+            // スキップされた単語のリストを表示
+            skippedWordsElement.style.display = 'block';
+        }
+
+        function hideSkippedWords(filename) {
+            const skippedWordsElement = document.getElementById(`skipped-${filename}`);
+            skippedWordsElement.style.display = 'none'; // マウスが離れたら隠す
+        }
     </script>
-    
 </body>
 {% endblock %}

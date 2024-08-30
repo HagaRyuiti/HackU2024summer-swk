@@ -191,5 +191,29 @@ def save_data():
     
     return jsonify({"message": "データが保存されました", "file_name": file_name})
 
+@app.route('/get_json_data')
+def get_json_data():
+    filename = request.args.get('filename')
+    if not filename:
+        return jsonify({'error': 'Filename not provided'}), 400
+
+    # Directory where JSON files are stored
+    json_dir = 'save_json'  # Replace with your actual directory path
+
+    try:
+        # Construct full file path
+        filepath = os.path.join(json_dir, filename)
+
+        # Read the JSON file
+        with open(filepath, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        return jsonify(data)  # Return JSON data
+
+    except FileNotFoundError:
+        return jsonify({'error': 'File not found'}), 404
+    except json.JSONDecodeError:
+        return jsonify({'error': 'Error decoding JSON'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
