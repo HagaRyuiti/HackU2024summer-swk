@@ -16,3 +16,108 @@ nav {
 nav button {
     margin-right: 10px;
 }
+
+.no{
+    color: red;
+}
+
+.ok{
+    color: aqua;
+}
+
+#page1{
+    text-align: center;
+    margin-top: 50px;
+}
+
+#themebox {
+    width: 300px;      /* テキストボックスの幅 */
+    height: 40px;      /* テキストボックスの高さ */
+    font-size: 16px;   /* テキストボックスのフォントサイズ */
+    margin-bottom: 20px; /* テキストボックスとボタンの間の余白 */
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#abutton {
+    width: 200px;      /* ボタンの幅 */
+    height: 50px;      /* ボタンの高さ */
+    font-size: 18px;   /* ボタンのフォントサイズ */
+    padding: 10px 20px; /* ボタン内の余白 */
+    background-color: #4CAF50; /* ボタンの背景色（例: 緑色） */
+    color: white;      /* ボタンの文字色 */
+    border:none ;
+    border-radius: 5px; /* ボタンの角を丸く */
+    cursor: pointer;   /* ボタンにホバーした際のポインター */
+    margin: 10px 0;    /* ボタン間の余白 */
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#ibutton {
+    width: 200px;      /* ボタンの幅 */
+    height: 50px;      /* ボタンの高さ */
+    font-size: 18px;   /* ボタンのフォントサイズ */
+    padding: 10px 20px; /* ボタン内の余白 */
+    background-color: #4CAF50; /* ボタンの背景色（例: 緑色） */
+    color: white;      /* ボタンの文字色 */
+    border:none ;
+    border-radius: 5px; /* ボタンの角を丸く */
+    cursor: pointer;   /* ボタンにホバーした際のポインター */
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#cent{
+    text-align: center;
+}
+
+#title{
+    text-align: center;
+    margin-top:200px;
+    font-size: 50px;
+}
+
+body{
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+    background-color:#d0ffd1;
+}
+
+#top {
+    margin-top: 200px;
+    font-size: 100px;
+    color: #454545;
+    font-weight: bold;
+}
+
+#playgame {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    width: 200px;   /* 幅を指定 */
+    height: 60px;   /* 高さを指定 */
+    font-size: 24px;   /* テキストを大きくする */
+    border-radius: 10px;  /* 角を10px丸くする */
+    border: none;
+    margin-bottom: 15px;  /* 下に15pxのスペースを設定 */
+}
+
+#replaygame {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    width: 200px;   /* 幅を指定 */
+    height: 60px;   /* 高さを指定 */
+    font-size: 24px;   /* テキストを大きくする */
+    border-radius: 10px;  /* 角を10px丸くする */
+    border: none;
+    margin-bottom: 15px;  /* 下に15pxのスペースを設定 */
+}
+
+#rankingpage {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    width: 200px;   /* 幅を指定 */
+    height: 60px;   /* 高さを指定 */
+    font-size: 24px;   /* テキストを大きくする */
+    border-radius: 10px;  /* 角を10px丸くする */
+    border: none;
+}

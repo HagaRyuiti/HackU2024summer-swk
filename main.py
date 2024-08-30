@@ -17,11 +17,11 @@ def generate(themebox):
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "あなたは役に立つアシスタントです。"},
-            {"role": "user", "content": f"1. 1行目に、{themebox}に関連する単語を生成してください。()書きはしないでください。"},
-            {"role": "user", "content": f"2. 2行目に、単語の英語と数字をそのままに、カタカナと漢字をひらがなに変換した単語も生成してください。"},
-            {"role": "user", "content": f"3. 3行目に、生成した単語に説明だけを付けてください。"},
-            {"role": "user", "content": f"4. 全ての行の先頭に必ず”-”を付けてください"},
-            {"role": "user", "content": f"1. 2. 3. 4.を順に、20回繰り返してください"},
+            {"role": "user", "content": f"走査1. 1行目に、{themebox}に関連する単語を生成してください。()書きはしないでください。"},
+            {"role": "user", "content": f"走査2. 2行目に、単語の英語と数字をそのままに、カタカナと漢字をひらがなに変換した単語も生成してください。"},
+            {"role": "user", "content": f"走査3. 3行目に、生成した単語に説明だけを付けてください。"},
+            {"role": "user", "content": f"走査4. 全ての行の先頭に必ず”-”を付けてください"},
+            {"role": "user", "content": f"走査1から4を順に、20回繰り返してください"},
             {"role": "user", "content": f"これ以外は生成する必要はありません。"}
         ],
         max_tokens = 2000,
