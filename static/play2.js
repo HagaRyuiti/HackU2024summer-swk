@@ -2,6 +2,7 @@
 import * as wanakana from 'https://cdn.skypack.dev/wanakana';
 
 console.log(data);
+console.log(themebox);
 
 // 辞書データの要素数を取得
 var numberOfKeys = Object.keys(data).length;
@@ -142,6 +143,7 @@ function scoreShow(time, dec) {
 
 function sendDataToServer(score, time, data) {
     const payload = {
+        themebox: themebox,
         score: score,
         time: time,
         data: data

@@ -77,18 +77,18 @@ def play2():
         themebox = request.form['themebox']
         data = generate(themebox)
         print("生成できたよ")
-        return render_template('play2.html', data=data)
+        return render_template('play2.html', data=data, themebox=themebox)
     # 'GET' メソッドの場合、空のデータを渡す
-    return render_template('play2.html', data=[])
+    return render_template('play2.html', data=[], themebox=themebox)
 
 @app.route('/play3', methods=['GET', 'POST'])
 def play3():
     if request.method == 'POST':
         themebox = request.form['themebox']
         data = generate(themebox)
-        return render_template('play3.html', data=data)
+        return render_template('play3.html', data=data, themebox=themebox)
     # 'GET' メソッドの場合、空のデータを渡す
-    return render_template('play3.html', data=[])
+    return render_template('play3.html', data=[], themebox=themebox)
 
 @app.route('/title', methods=['GET', 'POST'])
 def title():

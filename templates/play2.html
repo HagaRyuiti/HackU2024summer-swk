@@ -19,6 +19,7 @@
 <!-- Flaskから辞書データをJavaScriptに渡す -->
 <script type="text/javascript">
     var data = {{ data | tojson | safe }};
+    var themebox = {{ themebox | tojson | safe }};
 </script>
 
 <!-- 外部JavaScriptファイルを読み込む -->
