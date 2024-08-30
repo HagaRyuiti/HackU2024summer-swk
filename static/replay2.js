@@ -1,6 +1,8 @@
 // wanakanaをインポート
 import * as wanakana from 'https://cdn.skypack.dev/wanakana';
 
+data = data.data;
+
 console.log(data);
 
 // 辞書データの要素数を取得
@@ -72,10 +74,9 @@ function displayWord() {
         document.getElementById('inputField').style.display = 'none';
         document.getElementById('latinDisplay').style.display = 'none';
         document.getElementById('explainDisplay').style.display = 'none';
-        //setTimeout(() => {
-        //    window.location.href = 'index.html'; // 3秒後にindex.htmlにリダイレクト
-        //}, 3000); // 3000ミリ秒 = 3秒
-        resultPage('page4'); // スコア表示ページに移動
+        setTimeout(() => {
+            resultPage('page4'); // スコア表示ページに移動
+        }, 3000); // 3000ミリ秒 = 3秒
     }
 }
 
@@ -146,7 +147,7 @@ function resultPage(pageId) {
     const score = (1000 - currentTimerTime / 100 - skipsum * 40) * 100;
     const roundedScore = Math.round(score);
 
-    sendDataToServer(roundedScore, currentTimerTime, data);
+    //sendDataToServer(roundedScore, currentTimerTime, data);
 
     // Flaskの/indexルートに移動する
     window.location.href = '/title';
