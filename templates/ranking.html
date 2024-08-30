@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<body>
+    <h1>JSON ファイルリスト</h1>
+    <ul>
+        {% for json_file in json_files %}
+            <li>
+                <h2>{{ json_file.filename }}</h2>
+                <p><strong>テーマ:</strong> {{ json_file.data.themebox }}</p>
+                <p><strong>Score:</strong> {{ json_file.data.score }}</p>
+                <p><strong>Time:</strong> {{ json_file.data.time }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+{% endblock %}

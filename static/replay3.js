@@ -97,7 +97,7 @@ function displayWord() {
 
         scoreShow(currentTimerTime, skipsum);
 
-        const score = (1000 - currentTimerTime / 100 - skipsum * 40) * 100;
+        const score = (1000 - currentTimerTime / 500 - skipsum * 40) * 10;
         const roundedScore = Math.round(score);
 
         //sendDataToServer(roundedScore, currentTimerTime, data);

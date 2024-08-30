@@ -143,7 +143,7 @@ function SkipButtonClick() {
 
 
 function scoreShow(time, dec) {
-    const score = (1000 - time / 100 - dec * 40) * 100;
+    const score = (1000 - time / 500 - dec * 40) * 10;
     const roundedScore = Math.round(score);
     document.getElementById("score4").innerHTML = roundedScore;
     console.log(roundedScore);

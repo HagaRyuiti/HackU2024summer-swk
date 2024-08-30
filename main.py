@@ -149,13 +149,23 @@ def replay3():
     else:
         return jsonify({"error": "ファイルが見つかりませんでした。"}), 404
 
-@app.route('/result', methods=['GET', 'POST'])
-def result():
-    return render_template()
-
-@app.route('/ranking', methods=['GET', 'POST'])
+@app.route('/ranking')
 def ranking():
-    return render_template('ranking.html')
+    # JSONファイルのディレクトリパス
+    json_dir = 'save_json'  # 適切なディレクトリパスを指定
+
+    json_files = []
+    for filename in os.listdir(json_dir):
+        if filename.endswith('.json'):
+            filepath = os.path.join(json_dir, filename)
+            with open(filepath, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                json_files.append({'filename': filename, 'data': data})
+
+    # Scoreの高い順にソート
+    json_files_sorted = sorted(json_files, key=lambda x: x['data'].get('score', 0), reverse=True)
+
+    return render_template('ranking.html', json_files=json_files_sorted)
 
 @app.route('/save_data', methods=['POST'])
 def save_data():

@@ -15,8 +15,10 @@
             復習する
         </button><br>
     </a>
-    <button id="rankingpage" href="{{ url_for('ranking') }}">
-        ランキング
-    </button><br>        
+    <a href="{{ url_for('ranking') }}">
+        <button id="rankingpage">
+            ランキング
+        </button><br>
+    </a>      
 </div>
 {% endblock %}
