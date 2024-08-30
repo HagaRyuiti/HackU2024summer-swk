@@ -25,9 +25,19 @@ nav button {
     color: aqua;
 }
 
+/*全体*/
+body{
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+    background-color:#d0ffd1;
+}
+
+#playgame{
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+/*page1*/
 #page1{
     text-align: center;
-    margin-top: 50px;
+    font-size: 20px;
 }
 
 #themebox {
@@ -48,7 +58,6 @@ nav button {
     border:none ;
     border-radius: 5px; /* ボタンの角を丸く */
     cursor: pointer;   /* ボタンにホバーした際のポインター */
-    margin: 10px 0;    /* ボタン間の余白 */
     font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
 }
 
@@ -71,20 +80,17 @@ nav button {
 
 #title{
     text-align: center;
-    margin-top:200px;
-    font-size: 50px;
+    margin-top:100px;
+    font-size: 100px;
 }
 
-body{
-    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
-    background-color:#d0ffd1;
-}
-
+/*title.html*/
 #top {
     margin-top: 200px;
     font-size: 100px;
     color: #454545;
     font-weight: bold;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
 }
 
 #playgame {
@@ -97,6 +103,7 @@ body{
     border-radius: 10px;  /* 角を10px丸くする */
     border: none;
     margin-bottom: 15px;  /* 下に15pxのスペースを設定 */
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
 }
 
 #replaygame {
@@ -109,6 +116,7 @@ body{
     border-radius: 10px;  /* 角を10px丸くする */
     border: none;
     margin-bottom: 15px;  /* 下に15pxのスペースを設定 */
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
 }
 
 #rankingpage {
@@ -120,6 +128,93 @@ body{
     font-size: 24px;   /* テキストを大きくする */
     border-radius: 10px;  /* 角を10px丸くする */
     border: none;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+/*play2.html*/
+#timer2 {
+    font-size: 25px;
+    border: 2px solid green;
+    margin-left: 200px;
+    width: 100px;
+    height: 30px; /* 高さを設定して中央揃えを明確に */
+    text-align: center;
+    align-items: center;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#time{
+    font-size: 25px;
+    margin-left: 200px;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#playTitle{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 25px;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#tangoMode{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 0px;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#play2Cent{
+    text-align: center;
+    border: 3px solid green;
+    width: 700px;
+    height: 450px;
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#inputField{
+    width: 300px;      /* テキストボックスの幅 */
+    height: 40px;      /* テキストボックスの高さ */
+    font-size: 30px;   /* テキストボックスのフォントサイズ */
+    margin-bottom: 20px; /* テキストボックスとボタンの間の余白 */
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+    border: none;
+    background-color: #d0ffd1;
+}
+
+/*play3.html*/
+#timer3{
+    font-size: 25px;
+    border: 2px solid green;
+    margin-left: 200px;
+    width: 100px;
+    height: 30px; /* 高さを設定して中央揃えを明確に */
+    text-align: center;
+    align-items: center;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#button{
+    width: 200px;
+    height: 35px;
+    font-size: 30px;
+    margin-left: 200px;
+    margin-top: 35px;
+    font-family: 'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#timer4{
+    font-size: 25px;
+    margin-left: 200px;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
+}
+
+#score4{
+    font-size: 25px;
+    margin-left: 200px;
+    font-family:'Times New Roman',"Yu Gothic", "游ゴシック", "游ゴシック体";
 }
 
 #jsonfilelist {
