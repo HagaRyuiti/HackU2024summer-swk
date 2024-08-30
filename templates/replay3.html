@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Play</h1>
+
+<h1>単語モード</h1>
+<div id="timer3">00:00</div>
+<div id="timer4"></div>
+<div id="score4"></div>
+
+<div id="cent">
+    <p id="latinDisplay"></p>
+    <div id="explainDisplay"></div>
+    <p id="missDisplay"></p>
+    <input type="text" id="inputField" placeholder="Type the word here">
+    <button id="button" onclick="SkipButtonClick()">skip</button>
+</div>
+
+<!-- Flaskから辞書データをJavaScriptに渡す -->
+<script type="text/javascript">
+    var data = {{ data | tojson | safe }};
+</script>
+
+<!-- 外部JavaScriptファイルを読み込む -->
+<script type="module" src="static/replay3.js"></script>
+
+<!-- スクリプトを最後に移動 -->
+<script type="text/javascript">
+    // ページのロードが完了してからdisplayWord関数を呼び出す
+    window.addEventListener('DOMContentLoaded', (event) => {
+        if (Object.keys(data).length > 0) {
+            displayWord(); // データが存在する場合のみ最初の単語を表示
+        }
+    });
+</script>
+{% endblock %}

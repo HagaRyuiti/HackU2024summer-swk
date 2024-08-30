@@ -10,18 +10,33 @@
                 <p><strong>Score:</strong> {{ json_file.data.score }}</p>
                 <p><strong>Time:</strong> {{ json_file.data.time }}</p>
                 <!-- 各JSONファイルに対応するボタンを作成 -->
-                <button onclick="sendData('{{ json_file.filename }}')" action="{{ url_for('replay2') }}">単語モード</button>
-                <form method="POST" action="{{ url_for('replay3') }}">
-                    <input type="text" id="themebox" name="themebox">
-                    <button type="submit">一問一答モード</button>
-                </form>
+                <button onclick="sendData2('{{ json_file.filename }}')" action="{{ url_for('replay2') }}">単語モード</button>
+                <button onclick="sendData3('{{ json_file.filename }}')" action="{{ url_for('replay3') }}">一問一答モード</button>
             </li>
         {% endfor %}
     </ul>
 
     <script>
-        function sendData(filename) {
+        function sendData2(filename) {
             fetch('/replay2', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Content-Typeを正しく指定
+                },
+                body: JSON.stringify({ filename: filename }) // JSON形式でデータを送信
+            })
+            .then(response => response.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch((error) => {
+                console.error('エラー:', error);
+            });
+        }
+        function sendData3(filename) {
+            fetch('/replay3', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', // Content-Typeを正しく指定

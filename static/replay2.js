@@ -33,8 +33,6 @@ window.oninput = function () {
 // 関数定義をすべて追加
 window.displayWord = displayWord;
 window.checkInput = checkInput;
-window.SkipButtonClick = SkipButtonClick;
-window.resultPage = resultPage;
 window.sendDataToServer = sendDataToServer;
 window.scoreShow = scoreShow;
 window.msecToSecString = msecToSecString;
@@ -74,9 +72,36 @@ function displayWord() {
         document.getElementById('inputField').style.display = 'none';
         document.getElementById('latinDisplay').style.display = 'none';
         document.getElementById('explainDisplay').style.display = 'none';
+        console.log(skipsum);
+        var pages = document.querySelectorAll('.page');
+        pages.forEach(function (page) {
+            page.classList.remove('active');
+        });
+
+        // `timerStringDOM` を関数内で定義する
+        let timerStringDOM = document.getElementById('timer4');
+
+        if (timerId != null) {
+            clearInterval(timerId);
+            timerId = null;
+
+            const nowTime = new Date().getTime();
+            currentTimerTime = nowTime - startTime;
+
+            timerStringDOM.innerHTML = msecToSecString(currentTimerTime);
+        }
+
+        scoreShow(currentTimerTime, skipsum);
+
+        const score = (1000 - currentTimerTime / 100 - skipsum * 40) * 100;
+        const roundedScore = Math.round(score);
+
+        //sendDataToServer(roundedScore, currentTimerTime, data);
+
         setTimeout(() => {
-            resultPage('page4'); // スコア表示ページに移動
-        }, 3000); // 3000ミリ秒 = 3秒
+            // Flaskの/indexルートに移動する
+            window.location.href = '/title';
+        }, 10000); // 10000ミリ秒 = 10秒
     }
 }
 
@@ -109,50 +134,6 @@ function checkInput() {
         displayWord();
     }
 }
-
-// skipボタンのクリック処理
-function SkipButtonClick() {
-    skipsum++;
-    currentIndex++;
-    if (currentIndex < numberOfKeys) {
-        displayWord();
-    } else {
-        console.log("すべてのデータが表示されました。");
-        resultPage('page4');
-    }
-}
-
-function resultPage(pageId) {
-    console.log(skipsum);
-    var pages = document.querySelectorAll('.page');
-    pages.forEach(function (page) {
-        page.classList.remove('active');
-    });
-
-    // `timerStringDOM` を関数内で定義する
-    let timerStringDOM = document.getElementById('timer4');
-
-    if (timerId != null) {
-        clearInterval(timerId);
-        timerId = null;
-
-        const nowTime = new Date().getTime();
-        currentTimerTime = nowTime - startTime;
-
-        timerStringDOM.innerHTML = msecToSecString(currentTimerTime);
-    }
-
-    scoreShow(currentTimerTime, skipsum);
-
-    const score = (1000 - currentTimerTime / 100 - skipsum * 40) * 100;
-    const roundedScore = Math.round(score);
-
-    //sendDataToServer(roundedScore, currentTimerTime, data);
-
-    // Flaskの/indexルートに移動する
-    window.location.href = '/title';
-}
-
 
 function scoreShow(time, dec) {
     const score = (1000 - time / 100 - dec * 40) * 100;
